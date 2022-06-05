@@ -1,13 +1,12 @@
 package example.springbootjwt.dto;
 
-import example.springbootjwt.enums.Role;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.validation.constraints.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -36,7 +35,7 @@ public class UserPostRequestBody {
     @NotEmpty
     private String password;
 
-    @Enumerated(EnumType.STRING)
+    @NotEmpty
     @NotNull
-    private Role role;
+    private List<String> roles = new ArrayList<>();
 }

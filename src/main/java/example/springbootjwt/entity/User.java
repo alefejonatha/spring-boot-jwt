@@ -1,9 +1,10 @@
 package example.springbootjwt.entity;
 
-import example.springbootjwt.enums.Role;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @Entity(name = "tab_user")
@@ -28,13 +29,13 @@ public class User {
     @Column(length = 100, nullable = false)
     private String password;
 
-    @Enumerated(EnumType.STRING)
-    @Column(length = 20, nullable = false)
-    private Role role;
+//    @Enumerated(EnumType.STRING)
+//    @Column(length = 20, nullable = false)
+//    private Role role;
 
-//    @ElementCollection(fetch = FetchType.EAGER)
-//    @CollectionTable(name = "tab_user_roles", joinColumns = @JoinColumn(name = "username"))
-//    @Column(name = "role_id")
-//    private List<String> roles = new ArrayList<>();
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(name = "tab_user_roles", joinColumns = @JoinColumn(name = "username"))
+    @Column(name = "role_id")
+    private List<String> roles = new ArrayList<>();
 
 }
