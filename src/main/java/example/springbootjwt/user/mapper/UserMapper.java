@@ -1,8 +1,8 @@
-package example.springbootjwt.mapper;
+package example.springbootjwt.user.mapper;
 
-import example.springbootjwt.dto.UserPostRequestBody;
-import example.springbootjwt.dto.UserPutRequestBody;
-import example.springbootjwt.entity.User;
+import example.springbootjwt.user.dto.UserPostRequestBody;
+import example.springbootjwt.user.dto.UserPutRequestBody;
+import example.springbootjwt.user.entity.User;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 

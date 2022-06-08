@@ -1,4 +1,4 @@
-package example.springbootjwt.dto;
+package example.springbootjwt.login;
 
 import lombok.Getter;
 import lombok.Setter;

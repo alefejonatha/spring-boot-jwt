@@ -1,4 +1,4 @@
-package example.springbootjwt.dto;
+package example.springbootjwt.user.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -11,7 +11,10 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserPostRequestBody {
+public class UserPutRequestBody {
+
+    @NotNull
+    private Long id;
 
     @NotNull
     @NotEmpty

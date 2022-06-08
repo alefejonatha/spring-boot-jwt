@@ -16,6 +16,25 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig {
+
+    private static final String ACCESS_ADMIN_URL = "/api/v1/login/admin/**";
+    private static final String ACCESS_USER_URL = "/api/v1/login/user/**";
+    private static final String USERS_API_URL = "/api/v1/users";
+    private static final String LOGIN_API_URL = "/api/v1/login";
+    private static final String H2_CONSOLE_URL = "/h2-console/**";
+    private static final String ROLE_ADMIN = "ADMIN";
+    private static final String ROLE_USER = "USER";
+
+    private static final String[] SWAGGER_RESOURCES = {
+            // -- swagger ui
+            "/**.html",
+            "/v3/api-docs/**",
+            "/webjars/**",
+            "/configuration/**",
+            "/swagger-resources/**",
+            "/swagger-ui/**"
+    };
+
     @Bean
     public SecurityFilterChain authorizationServerSecurityFilterChain(HttpSecurity http) throws Exception {
         http
@@ -23,13 +42,13 @@ public class WebSecurityConfig {
                 .addFilterAfter(new JWTFilter(), UsernamePasswordAuthenticationFilter.class)
                 .authorizeRequests()
 
-                .antMatchers("/api/v1/users/admin/**").hasRole("ADMIN")
-                .antMatchers("/api/v1/users/user/**").hasAnyRole("USER", "ADMIN")
+                .antMatchers(ACCESS_ADMIN_URL).hasRole(ROLE_ADMIN)
+                .antMatchers(ACCESS_USER_URL).hasAnyRole(ROLE_USER, ROLE_ADMIN)
 
-                .antMatchers("/h2-console/**").permitAll()
-                .antMatchers(HttpMethod.GET, "/api/v1/users").permitAll()
-                .antMatchers(HttpMethod.POST, "/api/v1/login").permitAll()
-                .antMatchers(HttpMethod.POST, "/api/v1/users").permitAll()
+                .antMatchers(H2_CONSOLE_URL).permitAll()
+                .antMatchers(SWAGGER_RESOURCES).permitAll()
+                .antMatchers(HttpMethod.GET, LOGIN_API_URL).permitAll()
+                .antMatchers(HttpMethod.POST, LOGIN_API_URL, USERS_API_URL).permitAll()
 
                 .anyRequest()
                 .authenticated()
@@ -43,9 +62,8 @@ public class WebSecurityConfig {
     @Bean
     public ServletRegistrationBean h2servletRegistration() {
         ServletRegistrationBean registrationBean = new ServletRegistrationBean(new WebdavServlet());
-        registrationBean.addUrlMappings("/h2-console/**");
+        registrationBean.addUrlMappings(H2_CONSOLE_URL);
         return registrationBean;
     }
-
 
 }

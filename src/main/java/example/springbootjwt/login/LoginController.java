@@ -1,21 +1,17 @@
-package example.springbootjwt.controller;
+package example.springbootjwt.login;
 
-import example.springbootjwt.dto.UserPostRequestBody;
-import example.springbootjwt.entity.User;
-import example.springbootjwt.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
-
 @RestController
-@RequestMapping("/api/v1/users")
-public class UserController {
+@RequestMapping("/api/v1/login")
+public class LoginController {
 
     @Autowired
-    private UserService userService;
+    private LoginService loginService;
+
 
     @GetMapping
     public String welcome() {
@@ -32,10 +28,10 @@ public class UserController {
         return "Administrador autorizado";
     }
 
+
     @PostMapping
-    public ResponseEntity<Void> createUser(@RequestBody @Valid UserPostRequestBody userPostRequestBody) { //TODO RETORNAR USUÁRIO CUSTOMIZADO
-        userService.save(userPostRequestBody);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+    public ResponseEntity<SessionDTO> logar(@RequestBody LoginDTO loginDTO) {
+        return new ResponseEntity<>(loginService.login(loginDTO), HttpStatus.OK);
     }
 
 }

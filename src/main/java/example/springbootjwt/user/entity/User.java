@@ -1,4 +1,4 @@
-package example.springbootjwt.entity;
+package example.springbootjwt.user.entity;
 
 import lombok.Data;
 

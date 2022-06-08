@@ -1,9 +1,7 @@
-package example.springbootjwt.service;
+package example.springbootjwt.login;
 
-import example.springbootjwt.dto.LoginDTO;
-import example.springbootjwt.dto.SessionDTO;
-import example.springbootjwt.entity.User;
-import example.springbootjwt.repository.UserRepository;
+import example.springbootjwt.user.entity.User;
+import example.springbootjwt.user.repository.UserRepository;
 import example.springbootjwt.security.JWTCreator;
 import example.springbootjwt.security.JWTObject;
 import example.springbootjwt.security.PasswordEncodingConfig;
